@@ -1,0 +1,137 @@
+#####################################
+# Default configs
+len_history: 10
+
+#####################################
+# Actor-critic
+critic:
+  num_layers: 2
+  hidden_dim: 256
+  activation: tanh  # [tanh] or [relu] 
+
+actor:
+  num_layers: 2
+  hidden_dim: 256
+  activation: tanh
+
+#####################################
+# History encoder types
+history_encoder:
+  stacked:
+    hidden_dim: 128
+    out_dim: 10
+    num_fc_layers: 3
+    num_rnn_layers: 0
+    activation: tanh
+
+  rnn:
+    hidden_dim: 128
+    out_dim: 10
+    num_fc_layers: 2
+    num_rnn_layers: 1
+    activation: tanh
+
+  pearl:
+    hidden_dim: 128
+    out_dim: 10
+    num_fc_layers: 3
+    num_rnn_layers: 0
+    activation: tanh
+#####################################
+# Decoder types
+decoder:
+  osi_gt:
+    num_decoder_layers: 0
+
+  osi:
+    num_decoder_layers: 1
+    activation: tanh
+
+  osi_nll:
+    num_decoder_layers: 1
+    activation: tanh
+
+  cadm:
+    num_decoder_layers: 3
+    activation: tanh
+
+  pearl:
+    num_decoder_layers: 1
+    activation: tanh
+
+#####################################
+# Context encoder types
+context_encoder:
+  none:
+    out_dim: 0
+
+  vanilla_stacked:
+    history_encoder_type: stacked
+
+  vanilla_rnn:
+    history_encoder_type: rnn
+
+  osi_gt:
+    out_dim: -1
+    history_encoder_type: stacked
+    decoder_type: osi_gt
+
+  osi_stacked:
+    out_dim: -1
+    history_encoder_type: stacked
+    decoder_type: osi
+
+  osi_rnn:
+    out_dim: -1
+    history_encoder_type: rnn
+    decoder_type: osi
+
+  osi_stacked_emb:
+    history_encoder_type: stacked
+    decoder_type: osi
+
+  osi_rnn_emb:
+    history_encoder_type: rnn
+    decoder_type: osi
+
+  osi_nll_stacked:
+    out_dim: -2
+    history_encoder_type: stacked
+    decoder_type: osi_nll
+
+  osi_nll_rnn:
+    out_dim: -2
+    history_encoder_type: rnn
+    decoder_type: osi_nll
+
+  osi_nll_stacked_emb:
+    history_encoder_type: stacked
+    decoder_type: osi_nll
+
+  osi_nll_rnn_emb:
+    history_encoder_type: rnn
+    decoder_type: osi_nll
+
+  cadm_stacked:
+    history_encoder_type: stacked
+    decoder_type: cadm
+    # sample_trajectory: True
+
+  cadm_rnn:
+    history_encoder_type: rnn
+    decoder_type: cadm
+    # sample_trajectory: True
+
+  pearl:
+    history_encoder_type: pearl
+    decoder_type: pearl
+
+  pearl_stacked:
+    history_encoder_type: stacked
+    decoder_type: pearl
+
+  pearl_rnn:
+    history_encoder_type: rnn
+    decoder_type: pearl
+
+#####################################
